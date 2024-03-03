@@ -4,8 +4,8 @@ UPPERCASE_Z_ASCI = 90
 # user_sentence = input("Type the senctence you want to encrypt/decrypt: ").upper()
 # user_key = int(input("Type the key you want it to be encrypted/decrypted with: "))
 
-user_sentence = "Lbh pna trg zl frperg. Lbh qba'g unir gb xabj ubj.".upper()
-# user_key = 5
+user_sentence = "Zrgubq va juvpu rnpu yrggre va gur cynvagrkg vf ercynprq".upper()
+# user_key = 7
 
 
 def encrypter(sentence, key):
@@ -13,7 +13,7 @@ def encrypter(sentence, key):
     for letter in sentence:
         if letter.isalpha():
             shifted_letter = chr(ord(letter) + key if ord(letter) + key <= UPPERCASE_Z_ASCI
-                                 else ord(letter) + key - ALPHABET_LETTERS)
+                                 else ord(letter) + key - ALPHABET_LETTERS * (max(1, key // ALPHABET_LETTERS)))
             # Makes it so it only works with A-Z chars
             encrypted_sentence += shifted_letter
         else:
@@ -38,7 +38,7 @@ def decrypter(sentence):
         for word in current_sentence.split():
             if word in common_words:
                 counter += 1
-            if counter == 3:
+            if counter == 2:
                 return current_sentence, i
 
     return "No solution found!", False
@@ -106,8 +106,8 @@ def main():
     # print(encrypted_sentence)
 
     # for i in range(1, 26):
-    #     decrypted_sentence = simple_decrypter(user_sentence, i)
-    #     print(decrypted_sentence)
+    # decrypted_sentence = simple_decrypter(user_sentence, user_key)
+    # print(decrypted_sentence)
 
     # decrypted = decrypter(user_sentence)
     # print(f"The decrypted cipher is: {decrypted[0]}")
