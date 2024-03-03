@@ -4,13 +4,13 @@ UPPERCASE_Z_ASCI = 90
 # user_sentence = input("Type the senctence you want to encrypt/decrypt: ").upper()
 # user_key = int(input("Type the key you want it to be encrypted/decrypted with: "))
 
-user_sentence = "Zrgubq va juvpu rnpu yrggre va gur cynvagrkg vf ercynprq".upper()
+# user_sentence = "Zrgubq va juvpu rnpu yrggre va gur cynvagrkg vf ercynprq".upper()
 # user_key = 7
 
 
 def encrypter(sentence, key):
     encrypted_sentence = ""
-    for letter in sentence:
+    for letter in sentence.upper():
         if letter.isalpha():
             shifted_letter = chr(ord(letter) + key if ord(letter) + key <= UPPERCASE_Z_ASCI
                                  else ord(letter) + key - ALPHABET_LETTERS * (max(1, key // ALPHABET_LETTERS)))
@@ -102,6 +102,8 @@ def decrypter_success_rate():
 
 
 def main():
+    # user_sentence = "Dren Morina"
+    # user_key = 7
     # encrypted_sentence = encrypter(user_sentence, user_key)
     # print(encrypted_sentence)
 
@@ -113,7 +115,8 @@ def main():
     # print(f"The decrypted cipher is: {decrypted[0]}")
     # print(f"The key used is is: {decrypted[1]}")
 
-    decrypter_success_rate()
+    # decrypter_success_rate()
+    return
 
 
 main()
