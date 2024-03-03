@@ -17,6 +17,19 @@ key_entry = Entry(root, width=4)
 key_entry.insert(0, "5")
 key_entry.grid(row=1, column=1, padx=5, pady=5)
 
+
+def key_state():
+    if decrypt.get() == 2:
+        key_entry.config(state="disabled")
+    else:
+        key_entry.config(state="normal")
+
+
+decrypt = IntVar()
+decrypt.set(1)
+Radiobutton(root, text="Simple Decrypt", variable=decrypt, value=1, command=key_state).grid(row=2, column=1)
+Radiobutton(root, text="Smart Decrypt", variable=decrypt, value=2, command=key_state).grid(row=3, column=1)
+
 output_label = Label(root, text="Output text")
 output_label.grid(row=0, column=2)
 
@@ -32,7 +45,16 @@ def decrypted_text_output():
 
 def encrypted_text_output():
     input_text.delete("1.0", END)
-    input_text.insert("1.0", simple_decrypter(output_text.get("1.0", 'end-1c'), int(key_entry.get())))
+    if decrypt.get() == 1:
+        input_text.insert("1.0", simple_decrypter(output_text.get("1.0", 'end-1c'), int(key_entry.get())))
+    else:
+        decrypted_message = decrypter(output_text.get("1.0", "end-1c"))
+        input_text.insert("1.0", decrypted_message[0])
+        key_entry.config(state="normal")
+        key_entry.delete(0, END)
+        key_entry.insert(0, decrypted_message[1])
+        key_entry.config(state="disabled")
+        return
 
 
 encrypt_button = Button(root, text="Encrypt", command=decrypted_text_output)
