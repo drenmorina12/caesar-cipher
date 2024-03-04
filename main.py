@@ -44,51 +44,14 @@ def decrypter(sentence):
     return "No solution found!", False
 
 
-def decrypter_success_rate():
-    sentences_to_test = [
-        "Gur Frperg Vf Pbzr",
-        "Abj vf gur fvkgu frn",
-        "Fbzrbar fnlf vg vf zl fbpvrgl",
-        "Lbh pna trg zr gb zl ubzr",
-        "Lrf, guvf vf n frperg vachg",
-        "Fb vf gur frperg nggenpgrq?",
-        "V qvqa'g xabj guvf jnf noyr",
-        "Gur arkg fvkgu frn vf jvyyrq",
-        "Gur Tbyq Vf Pbzvat",
-        "Gur Pbzvat vf gur Orfg",
-        "Lbh pna trg gur fgbel",
-        "Ubj vf guvf cbfg naq gurfr obqrf?",
-        "Jung vf gur qvfgnapr bs gur Cnffjbeq?",
-        "Lbh pna'g trg gur frperg bire gur obk",
-        "Gur zlfgrel vf gur svefg tbbq qnl bs gur lrne",
-        "Lbh pna trg zl frperg. Lbh qba'g unir gb xabj ubj.",
-        "Gur frperg vf n uvag. Guvf vf n ovg.",
-        "Gur Frperg vf njrfbzr",
-        "Jr jvyy trg gur frperg naq qba'g unir gb bayl gur arkg",
-        "Gur Fnyg Vf Pbzr",
-        "Nzvgu vf gur frperg frn",
-        "Fbzrbar fnlf vg vf zl qvfgnapr",
-        "Lbh pna trg zr gb zl ubzr",
-        "Lrf, guvf vf n frperg vachg",
-        "Vg vf lbh'g ybatzragny",
-        "Fb vf gur frperg nggenpgrq?",
-        "V qvqa'g xabj guvf jnf noyr",
-        "Gur arkg fvkgu frn vf jvyyrq",
-        "Gur Tbyq Vf Pbzvat",
-        "Gur Pbzvat vf gur Orfg",
-        "Lbh pna trg gur fgbel",
-        "Ubj vf guvf cbfg naq gurfr obqrf?",
-        "Jung vf gur qvfgnapr bs gur Cnffjbeq?",
-        "Lbh pna'g trg gur frperg bire gur obk",
-        "Gur zlfgrel vf gur svefg tbbq qnl bs gur lrne",
-        "Lbh pna trg zl frperg. Lbh qba'g unir gb xabj ubj.",
-        "Gur frperg vf n uvag. Guvf vf n ovg.",
-        "Gur Frperg vf njrfbzr",
-        "Jr jvyy trg gur frperg naq qba'g unir gb bayl gur arkg",
-        "Vg vf abg gur frperg"
-    ]
+def decrypter_success_rate(file_path):
+    with open(file_path, 'r') as file:
+        sentence_list = file.read().splitlines()
+    sentences_to_test = set(sentence_list)
+
     list_length = len(sentences_to_test)
     succesful_decryption = 0
+    error_messages = []
 
     for s in sentences_to_test:
         decrypted_sentence = decrypter(s.upper())
@@ -96,15 +59,19 @@ def decrypter_success_rate():
         if decrypted_sentence[1] is not False:
             succesful_decryption += 1
         else:
+            error_messages.append(f"Couldnt decrypt: {s}")
             print(f"Couldnt decrypt: {s}")
 
+    error_messages.append(f"Success rate: {succesful_decryption/list_length * 100}%")
     print(f"Success rate: {succesful_decryption/list_length * 100}%")
+
+    return error_messages
 
 
 def main():
-    user_sentence = "Dren Morina"
-    user_key = 43
-    encrypted_sentence = encrypter(user_sentence, user_key)
+    # user_sentence = "Dren Morina"
+    # user_key = 43
+    # encrypted_sentence = encrypter(user_sentence, user_key)
     # print(encrypted_sentence)
 
     # for i in range(1, 26):
@@ -115,7 +82,7 @@ def main():
     # print(f"The decrypted cipher is: {decrypted[0]}")
     # print(f"The key used is is: {decrypted[1]}")
 
-    # decrypter_success_rate()
+    # decrypter_success_rate("sample.txt")
     return
 
 
