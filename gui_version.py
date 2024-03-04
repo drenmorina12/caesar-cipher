@@ -2,7 +2,7 @@ from tkinter import *
 from main import encrypter, decrypter, simple_decrypter, decrypter_success_rate
 
 root = Tk()
-root.title("Testing")
+root.title("Caesar Cipher")
 # Input
 input_label = Label(root, text="Input text")
 input_label.grid(row=0, column=0)
@@ -32,10 +32,14 @@ key_entry.grid(row=0, column=1)
 def increment(op):
     key = key_entry.get()
     key_entry.delete(0, END)
-    if op == 1:
-        key_entry.insert(0, str(int(key) - 1))
-    elif op == 2:
+    if key == '':
+        key = "0"
+    if op == 2:
         key_entry.insert(0, str(int(key) + 1))
+    elif op == 1 and int(key) > 1:
+        key_entry.insert(0, str(int(key) - 1))
+    else:
+        key_entry.insert(0, str(int(key)))
 
 
 sub_button = Button(frame, text="-", width=2, height=1, command=lambda: increment(1))
@@ -56,7 +60,7 @@ def key_state():
 decrypt = IntVar()
 decrypt.set(1)
 Radiobutton(root, text="Simple Decrypt", variable=decrypt, value=1, command=key_state).grid(row=2, column=1)
-Radiobutton(root, text="Smart Decrypt", variable=decrypt, value=2, command=key_state).grid(row=3, column=1)
+Radiobutton(root, text="Smart Decrypt", variable=decrypt, value=2, command=key_state).grid(row=3, column=1, pady=10)
 
 # Output
 output_label = Label(root, text="Output text")
@@ -96,16 +100,23 @@ decrypt_button.grid(row=2, column=2)
 def test_sample():
     decrypted_sample_result = decrypter_success_rate(test_entry.get())
     for msg in decrypted_sample_result:
+        input_text.delete("1.0", END)
         input_text.insert("1.0", msg + "\n")
 
 
-test_label = Label(root, text="Write file path:")
+# testing_frame_label = Label(root, text="-Test the success rate of list of sentences")
+# testing_frame_label.grid(row=4, column=1)
+
+testing_frame = LabelFrame(root, padx=20, pady=20, text="Test the success rate of list of sentences")
+testing_frame.grid(row=5, column=1, pady=20)
+
+test_label = Label(testing_frame, text="Write file path:")
 test_label.grid(row=4, column=1)
 
-test_entry = Entry(root, width=30)
+test_entry = Entry(testing_frame, width=30)
 test_entry.grid(row=5, column=1, pady=5)
 
-test_button = Button(root, text="Test", command=test_sample)
+test_button = Button(testing_frame, text="Test", command=test_sample)
 test_button.grid(row=6, column=1, pady=5)
 
 root.mainloop()
