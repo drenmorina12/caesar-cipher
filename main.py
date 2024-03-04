@@ -12,8 +12,7 @@ def encrypter(sentence, key):
     encrypted_sentence = ""
     for letter in sentence.upper():
         if letter.isalpha():
-            shifted_letter = chr(ord(letter) + key if ord(letter) + key <= UPPERCASE_Z_ASCI
-                                 else ord(letter) + key - ALPHABET_LETTERS * (max(1, key // ALPHABET_LETTERS)))
+            shifted_letter = chr((ord(letter) + key - ord('A')) % ALPHABET_LETTERS + ord('A'))
             # Makes it so it only works with A-Z chars
             encrypted_sentence += shifted_letter
         else:
