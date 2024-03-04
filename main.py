@@ -102,9 +102,9 @@ def decrypter_success_rate():
 
 
 def main():
-    # user_sentence = "Dren Morina"
-    # user_key = 7
-    # encrypted_sentence = encrypter(user_sentence, user_key)
+    user_sentence = "Dren Morina"
+    user_key = 43
+    encrypted_sentence = encrypter(user_sentence, user_key)
     # print(encrypted_sentence)
 
     # for i in range(1, 26):
