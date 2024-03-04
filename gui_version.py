@@ -3,7 +3,7 @@ from main import encrypter, decrypter, simple_decrypter, decrypter_success_rate
 
 root = Tk()
 root.title("Testing")
-
+# Input
 input_label = Label(root, text="Input text")
 input_label.grid(row=0, column=0)
 
@@ -58,6 +58,7 @@ decrypt.set(1)
 Radiobutton(root, text="Simple Decrypt", variable=decrypt, value=1, command=key_state).grid(row=2, column=1)
 Radiobutton(root, text="Smart Decrypt", variable=decrypt, value=2, command=key_state).grid(row=3, column=1)
 
+# Output
 output_label = Label(root, text="Output text")
 output_label.grid(row=0, column=2)
 
@@ -90,5 +91,21 @@ encrypt_button.grid(row=2, column=0)
 
 decrypt_button = Button(root, text="Decrypt", command=encrypted_text_output)
 decrypt_button.grid(row=2, column=2)
+
+
+def test_sample():
+    decrypted_sample_result = decrypter_success_rate(test_entry.get())
+    for msg in decrypted_sample_result:
+        input_text.insert("1.0", msg + "\n")
+
+
+test_label = Label(root, text="Write file path:")
+test_label.grid(row=4, column=1)
+
+test_entry = Entry(root, width=30)
+test_entry.grid(row=5, column=1, pady=5)
+
+test_button = Button(root, text="Test", command=test_sample)
+test_button.grid(row=6, column=1, pady=5)
 
 root.mainloop()
