@@ -13,7 +13,14 @@ input_text.grid(row=1, column=0, padx=10, pady=10)
 key_label = Label(root, text="Key")
 key_label.grid(row=0, column=1)
 
-key_entry = Entry(root, width=4)
+
+def validate_input(char):  # Input INT validation
+    return char.isdigit() or char == ""
+
+
+validation = root.register(validate_input)
+
+key_entry = Entry(root, width=4, validate="key", validatecommand=(validation, '%S'))
 key_entry.insert(0, "5")
 key_entry.grid(row=1, column=1, padx=5, pady=5)
 
