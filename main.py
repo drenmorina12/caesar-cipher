@@ -47,22 +47,28 @@ def decrypter_success_rate(file_path):
     with open(file_path, 'r') as file:
         sentence_list = file.read().splitlines()
     sentences_to_test = set(sentence_list)
+    # print(sentences_to_test)
 
     list_length = len(sentences_to_test)
     succesful_decryption = 0
     error_messages = []
 
     for s in sentences_to_test:
+        print(s)
         decrypted_sentence = decrypter(s.upper())
         # print(decrypted_sentence[0])
         if decrypted_sentence[1] is not False:
             succesful_decryption += 1
+            print(decrypted_sentence)
+            print("\n")
         else:
             error_messages.append(f"Couldnt decrypt: {s}")
-            print(f"Couldnt decrypt: {s}")
+            print(f"---Couldnt decrypt: {s}")
 
     error_messages.append(f"Success rate: {succesful_decryption/list_length * 100}%")
+    error_messages.append(f"{succesful_decryption}/{list_length}")
     print(f"Success rate: {succesful_decryption/list_length * 100}%")
+    print(f"{succesful_decryption}/{list_length}")
 
     return error_messages
 
@@ -81,7 +87,7 @@ def main():
     # print(f"The decrypted cipher is: {decrypted[0]}")
     # print(f"The key used is is: {decrypted[1]}")
 
-    # decrypter_success_rate("sample.txt")
+    decrypter_success_rate("sample.txt")
     return
 
 
